@@ -189,7 +189,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initLightbox();
   initTestimonialsCarousel();
   initContactForm();
-  initPWA();
   initBackToTop();
   initParticles();
 });
@@ -605,37 +604,6 @@ function showToast(msg, type = 'success') {
   style.textContent = '@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}';
   document.head.appendChild(style);
   setTimeout(() => { toast.style.opacity='0'; toast.style.transition='opacity .3s'; setTimeout(()=>toast.remove(),300); }, 3500);
-}
-
-// ─── PWA ─────────────────────────────────────────────
-
-function initPWA() {
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js').catch(() => {});
-    });
-  }
-
-  let deferredPrompt;
-  const installBtn = document.getElementById('install-btn');
-
-  window.addEventListener('beforeinstallprompt', e => {
-    e.preventDefault();
-    deferredPrompt = e;
-    if (installBtn) installBtn.style.display = 'inline-flex';
-  });
-
-  installBtn?.addEventListener('click', async () => {
-    if (!deferredPrompt) return;
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    deferredPrompt = null;
-    if (installBtn) installBtn.style.display = 'none';
-  });
-
-  window.addEventListener('appinstalled', () => {
-    if (installBtn) installBtn.style.display = 'none';
-  });
 }
 
 // ─── BACK TO TOP ─────────────────────────────────────

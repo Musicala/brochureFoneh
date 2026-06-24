@@ -277,17 +277,6 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   color: var(--text-primary);
 }
 #dark-toggle:hover { transform: scale(1.1); }
-#install-btn {
-  display: none;
-  padding: 8px 18px;
-  border-radius: var(--r-full);
-  font-size: .82rem;
-  font-weight: 600;
-  background: var(--gradient-brand);
-  color: white;
-  transition: var(--t);
-}
-#install-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
 #hamburger {
   display: none;
   width: 40px; height: 40px;
